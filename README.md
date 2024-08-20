@@ -1,6 +1,3 @@
-Certainly, here's a GitHub `README.md` file based on the provided Python code:
-
-```markdown
 # Image Processing with Edge Detection
 
 This Python script demonstrates basic image processing techniques, including converting an image to grayscale, applying Gaussian blur for noise reduction, and performing edge detection using the Canny algorithm.
