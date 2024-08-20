@@ -1,0 +1,48 @@
+# Check if GPU is available
+import torch
+
+if torch.cuda.is_available():
+    device = torch.device("cuda")
+    print("GPU is available and being used!")
+else:
+    device = torch.device("cpu")
+    print("GPU not available, using CPU.")
+
+# Install required libraries
+!pip install opencv-python-headless Pillow matplotlib
+
+# Import necessary libraries
+import cv2
+from PIL import Image
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Load and display original image
+image_path = "https://www.gstatic.com/webp/gallery3/1_webp_ll.webp" # Replace with your image URL
+image = Image.open(requests.get(image_path, stream=True).raw)
+image = np.array(image)
+plt.imshow(image)
+plt.title("Original Image")
+plt.axis('off')
+plt.show()
+
+# Convert to grayscale
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+plt.imshow(gray_image, cmap='gray')
+plt.title("Grayscale Image")
+plt.axis('off')
+plt.show()
+
+# Apply Gaussian blur for noise reduction
+blurred_image = cv2.GaussianBlur(gray_image, (5, 5), 0)
+plt.imshow(blurred_image, cmap='gray')
+plt.title("Blurred Image")
+plt.axis('off')
+plt.show()
+
+# Edge detection using Canny algorithm
+edges = cv2.Canny(blurred_image, 100, 200)
+plt.imshow(edges, cmap='gray')
+plt.title("Edge Detected Image")
+plt.axis('off')
+plt.show()
